@@ -1,11 +1,7 @@
-"""
-Simple graph implementation
-"""
-from util import Stack, Queue  # These may come in handy
-
 class Graph:
 
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
+
     def __init__(self):
         self.vertices = {}
 
@@ -30,7 +26,6 @@ class Graph:
                 print(v)
                 for n in self.vertices[v]:
                     q.append(n)
- 
 
     def dft(self, starting_vertex):
         visited = set()
@@ -84,9 +79,13 @@ class Graph:
         elif starting_vertex not in visited:
             visited.add(starting_vertex)
             for node in self.vertices[starting_vertex]:
-                path = [starting_vertex] + self.dfs_recursive(node, destination_vertex, visited)
+                path = [starting_vertex] + self.dfs_recursive(
+                    node, destination_vertex, visited
+                )
         return path
-if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     graph = Graph()  # Instantiate your graph
     # https://github.com/LambdaSchool/Graphs/blob/master/objectives/breadth-first-search/img/bfs-visit-order.png
     graph.add_vertex(1)
@@ -107,13 +106,13 @@ if __name__ == '__main__':
     graph.add_edge(2, 3)
     graph.add_edge(4, 6)
 
-    '''
+    """
     Should print:
         {1: {2}, 2: {3, 4}, 3: {5}, 4: {6, 7}, 5: {3}, 6: {3}, 7: {1, 6}}
-    '''
+    """
     print(graph.vertices)
 
-    '''
+    """
     Valid BFT paths:
         1, 2, 3, 4, 5, 6, 7
         1, 2, 3, 4, 5, 7, 6
@@ -127,30 +126,30 @@ if __name__ == '__main__':
         1, 2, 4, 3, 6, 5, 7
         1, 2, 4, 3, 7, 6, 5
         1, 2, 4, 3, 7, 5, 6
-    '''
+    """
     # graph.bft(1)
     # print('')
 
-    '''
+    """
     Valid DFT paths:
         1, 2, 3, 5, 4, 6, 7
         1, 2, 3, 5, 4, 7, 6
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
-    '''
+    """
     # graph.dft(1)
     # graph.dft_recursive(1)
 
-    '''
+    """
     Valid BFS path:
         [1, 2, 4, 6]
-    '''
+    """
     # print(graph.bfs(1, 6))
 
-    '''
+    """
     Valid DFS paths:
         [1, 2, 4, 6]
         [1, 2, 4, 7, 6]
-    '''
+    """
     # print(graph.dfs(1, 6))
     print(graph.dfs_recursive(1, 6))
