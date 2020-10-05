@@ -22,30 +22,26 @@ class Graph:
     def bft(self, starting_vertex):
         visited = set()
         q = []
-
         q.append(starting_vertex)
-        visited.add(starting_vertex)
         while q:
             v = q.pop(0)
-            print(v)
-            for n in self.vertices[v]:
-                if n not in visited:
-                    visited.add(n)
+            if v not in visited:
+                visited.add(v)
+                print(v)
+                for n in self.vertices[v]:
                     q.append(n)
  
 
     def dft(self, starting_vertex):
         visited = set()
         s = []
-
         s.append(starting_vertex)
-        visited.add(starting_vertex)
         while s:
             v = s.pop()
-            print(v)
-            for n in self.vertices[v]:
-                if n not in visited:
-                    visited.add(n)
+            if v not in visited:
+                visited.add(v)
+                print(v)
+                for n in self.vertices[v]:
                     s.append(n)
 
     def dft_recursive(self, starting_vertex, visited=set()):
@@ -123,7 +119,8 @@ if __name__ == '__main__':
         1, 2, 4, 3, 7, 6, 5
         1, 2, 4, 3, 7, 5, 6
     '''
-    # graph.bft(1)
+    graph.bft(1)
+    print('')
 
     '''
     Valid DFT paths:
@@ -133,7 +130,7 @@ if __name__ == '__main__':
         1, 2, 4, 6, 3, 5, 7
     '''
     graph.dft(1)
-    graph.dft_recursive(1)
+    # graph.dft_recursive(1)
 
     '''
     Valid BFS path:
