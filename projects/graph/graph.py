@@ -24,21 +24,29 @@ class Graph:
         q = []
 
         q.append(starting_vertex)
+        visited.add(starting_vertex)
         while q:
             v = q.pop(0)
             print(v)
-            visited.add(v)
             for n in self.vertices[v]:
                 if n not in visited:
+                    visited.add(n)
                     q.append(n)
  
 
     def dft(self, starting_vertex):
-        """
-        Print each vertex in depth-first order
-        beginning from starting_vertex.
-        """
-        pass  # TODO
+        visited = set()
+        s = []
+
+        s.append(starting_vertex)
+        visited.add(starting_vertex)
+        while s:
+            v = s.pop()
+            print(v)
+            for n in self.vertices[v]:
+                if n not in visited:
+                    visited.add(n)
+                    s.append(n)
 
     def dft_recursive(self, starting_vertex):
         """
@@ -126,7 +134,7 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    # graph.dft(1)
+    graph.dft(1)
     # graph.dft_recursive(1)
 
     '''
