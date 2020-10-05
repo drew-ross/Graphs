@@ -65,23 +65,27 @@ class Graph:
                     q.append(v + [n])
 
     def dfs(self, starting_vertex, destination_vertex):
-        """
-        Return a list containing a path from
-        starting_vertex to destination_vertex in
-        depth-first order.
-        """
-        pass  # TODO
+        visited = set()
+        s = []
+        s.append([starting_vertex])
+        while s:
+            v = s.pop()
+            if v[-1] == destination_vertex:
+                return v
+            if v[-1] not in visited:
+                visited.add(v[-1])
+                for n in self.vertices[v[-1]]:
+                    s.append(v + [n])
 
-    def dfs_recursive(self, starting_vertex, destination_vertex):
-        """
-        Return a list containing a path from
-        starting_vertex to destination_vertex in
-        depth-first order.
-
-        This should be done using recursion.
-        """
-        pass  # TODO
-
+    def dfs_recursive(self, starting_vertex, destination_vertex, visited=set()):
+        path = []
+        if starting_vertex == destination_vertex:
+            return [starting_vertex]
+        elif starting_vertex not in visited:
+            visited.add(starting_vertex)
+            for node in self.vertices[starting_vertex]:
+                path = [starting_vertex] + self.dfs_recursive(node, destination_vertex, visited)
+        return path
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
     # https://github.com/LambdaSchool/Graphs/blob/master/objectives/breadth-first-search/img/bfs-visit-order.png
@@ -141,7 +145,7 @@ if __name__ == '__main__':
     Valid BFS path:
         [1, 2, 4, 6]
     '''
-    print(graph.bfs(1, 6))
+    # print(graph.bfs(1, 6))
 
     '''
     Valid DFS paths:
@@ -149,4 +153,4 @@ if __name__ == '__main__':
         [1, 2, 4, 7, 6]
     '''
     # print(graph.dfs(1, 6))
-    # print(graph.dfs_recursive(1, 6))
+    print(graph.dfs_recursive(1, 6))
