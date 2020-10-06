@@ -51,26 +51,26 @@ class Graph:
         q = []
         q.append([starting_vertex])
         while q:
-            v = q.pop(0)
-            if v[-1] == destination_vertex:
-                return v
-            if v[-1] not in visited:
-                visited.add(v[-1])
-                for n in self.vertices[v[-1]]:
-                    q.append(v + [n])
+            path = q.pop(0)
+            if path[-1] == destination_vertex:
+                return path
+            if path[-1] not in visited:
+                visited.add(path[-1])
+                for n in self.vertices[path[-1]]:
+                    q.append(path + [n])
 
     def dfs(self, starting_vertex, destination_vertex):
         visited = set()
         s = []
         s.append([starting_vertex])
         while s:
-            v = s.pop()
-            if v[-1] == destination_vertex:
-                return v
-            if v[-1] not in visited:
-                visited.add(v[-1])
-                for n in self.vertices[v[-1]]:
-                    s.append(v + [n])
+            path = s.pop()
+            if path[-1] == destination_vertex:
+                return path
+            if path[-1] not in visited:
+                visited.add(path[-1])
+                for n in self.vertices[path[-1]]:
+                    s.append(path + [n])
 
     def dfs_recursive(self, starting_vertex, destination_vertex, visited=set()):
         path = []
