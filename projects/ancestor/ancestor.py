@@ -26,16 +26,12 @@ def earliest_ancestor(ancestors, starting_node):
         path for path in all_paths if len(path) == max(len(path) for path in all_paths)
     ]
 
+    # get lowest value ancestor
+    ancestor = min([path[0] for path in all_paths])
+    
     # return -1 if no answer
-    ancestor = -1
-
-    for path in all_paths:
-        if len(path) <= 1:
-            break
-        if ancestor == -1:
-            ancestor = path[0]
-        elif path[0] < ancestor:
-            ancestor = path[0]
+    if ancestor == starting_node:
+        ancestor = -1
 
     return ancestor
 
@@ -52,4 +48,4 @@ test_ancestors = [
     (11, 8),
     (10, 1),
 ]
-print(earliest_ancestor(test_ancestors, 6))
+print(earliest_ancestor(test_ancestors, 10))
