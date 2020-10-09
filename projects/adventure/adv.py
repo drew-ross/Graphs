@@ -48,13 +48,13 @@ def reverse_direction(direction):
         return "e"
 
 
-def go(room, direction, path, backing=False):
+def go(room, direction, backing=False):
     next_room = get_room(room, direction)
     room_map[room][direction] = next_room
     if next_room is not None:
         # move to the room, map exits for each room, keep a backup trail, log to visited
         room_map[next_room][reverse_direction(direction)] = room
-        path.append(direction)
+        traversal_path.append(direction)
         visited.add(next_room)
         if not backing:
             backup.append(reverse_direction(direction))
@@ -63,40 +63,32 @@ def go(room, direction, path, backing=False):
         return room
 
 
-ways = ["n", "e", "s", "w"]
-possible_paths = []
 
-for x in range(10):
-    path = []
-    room_map = dict()
+room_map = dict()
 
-    for i in range(len(room_graph)):
-        room_map[i] = {"n": "?", "e": "?", "s": "?", "w": "?"}
+for i in range(len(room_graph)):
+    room_map[i] = {"n": "?", "e": "?", "s": "?", "w": "?"}
 
-    visited = set()
-    backup = []
-    room = 0
-    visited.add(room)
+visited = set()
+backup = []
+room = 0
+visited.add(room)
 
-    while len(visited) < 500:
-        if "?" in room_map[room].values():
-            if room_map[room][ways[0]] == "?":
-                room = go(room, ways[0], path)
-            elif room_map[room][ways[1]] == "?":
-                room = go(room, ways[1], path)
-            elif room_map[room][ways[2]] == "?":
-                room = go(room, ways[2], path)
-            else:
-                room = go(room, ways[3], path)
+while len(visited) < 500:
+    if "?" in room_map[room].values():
+        if room_map[room]['n'] == "?":
+            room = go(room, 'n')
+        elif room_map[room]['e'] == "?":
+            room = go(room, 'e')
+        elif room_map[room]['s'] == "?":
+            room = go(room, 's')
         else:
-            back = backup[-1]
-            backup.pop()
-            room = go(room, back, path, True)
+            room = go(room, 'w')
+    else:
+        back = backup[-1]
+        backup.pop()
+        room = go(room, back, True)
 
-    possible_paths.append(path)
-
-for path in possible_paths:
-    print(len(path))
 #################################
 
 # TRAVERSAL TEST
