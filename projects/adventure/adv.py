@@ -31,11 +31,9 @@ traversal_path = []
 
 # Fill traversal path ##############################
 
-
 def get_room(room, direction):
     if direction in room_graph[room][1]:
         return room_graph[room][1][direction]
-
 
 def reverse_direction(direction):
     if direction == "n":
@@ -46,7 +44,6 @@ def reverse_direction(direction):
         return "n"
     if direction == "w":
         return "e"
-
 
 def go(room, direction, backing=False):
     next_room = get_room(room, direction)
@@ -61,8 +58,6 @@ def go(room, direction, backing=False):
         return next_room
     else:
         return room
-
-
 
 room_map = dict()
 
